@@ -315,7 +315,7 @@ if PI_DATE > add_months(sysdate, -12*3) then
 end if;
 
     begin select 1
-            into V_VERIFICATION_COURRIEL_ADMIN
+            into V_EST_ADMINISTRATEUR
             from TP3_ADMINISTRATEUR
             where COURRIEL_ADM = PI_COURRIEL_ADMINISTRATEUR;
             
@@ -376,7 +376,7 @@ exception
 end TP3_SP_ARCHIVER_SONDAGE;
 /
 
-execute TP3_SP_ARCHIVER_SONDAGE(to_date('2020-01-01', 'RRRR-MM-DD'));
+execute TP3_SP_ARCHIVER_SONDAGE(to_date('2020-01-01', 'RRRR-MM-DD'), 'anahno.mistvale@gmail.com');
 
 
 -- c
