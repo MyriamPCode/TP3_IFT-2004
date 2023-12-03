@@ -186,20 +186,34 @@ create table TP3_REPONSE_UTILISATEUR (
 --        where TYPE_UTI = 'Administrateur';
         
 -- b
-insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP2_NO_UTILISATEUR_SEQ.nextval, 'trym.tealeaf@gmail.com', TP2_FCT_GENERER_MOT_DE_PASSE(10), 'Trym', 'Tealeaf', 'Employé');
-insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP2_NO_UTILISATEUR_SEQ.nextval, 'anahno.mistvale@gmail.com', TP2_FCT_GENERER_MOT_DE_PASSE(16), 'Anahno', 'Mistvale', 'Administrateur');
+insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP3_NO_UTILISATEUR_SEQ.nextval, 'trym.tealeaf@gmail.com', TP3_FCT_GENERER_MOT_DE_PASSE(10), 'Trym', 'Tealeaf', 'Employé');
+insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP3_NO_UTILISATEUR_SEQ.nextval, 'anahno.mistvale@gmail.com', TP3_FCT_GENERER_MOT_DE_PASSE(16), 'Anahno', 'Mistvale', 'Administrateur');
+-- Ajouts Myriam
+insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP3_NO_UTILISATEUR_SEQ.nextval, 'ysanne.isard@gmail.com', TP3_FCT_GENERER_MOT_DE_PASSE(11), 'Ysanne', 'Isard', 'Responsable');
+insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP3_NO_UTILISATEUR_SEQ.nextval, 'dexter.jettster@gmail.com', TP3_FCT_GENERER_MOT_DE_PASSE(12), 'Dexter', 'Jettster', 'Responsable');
+insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP3_NO_UTILISATEUR_SEQ.nextval, 'zett.jukassa@gmail.com', TP3_FCT_GENERER_MOT_DE_PASSE(13), 'Zett', 'Jukassa', 'Employé');
+insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP3_NO_UTILISATEUR_SEQ.nextval, 'kir.kanos@gmail.com', TP3_FCT_GENERER_MOT_DE_PASSE(14), 'Kir', 'Kanos', 'Employé');
+insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP3_NO_UTILISATEUR_SEQ.nextval, 'bevel.lemelisk@gmail.com', TP3_FCT_GENERER_MOT_DE_PASSE(15), 'Bevel', 'Lemelisk', 'Employé');
 
 insert into TP3_ENTREPRISE (NOM_ENT, NOM_FICHIER_LOGO_ENT, ADRESSE_ENT, CODE_POSTAL_ENT, VILLE_ENT, COURRIEL_ENT) values ('King''s council', 'C:\User\Trym\KingsConcil\logo.jpg', '1 king avenue', 'R1K 1C1', 'Rexxentrum', 'king.council@gmail.com');
 insert into TP3_ENTREPRISE (NOM_ENT, NOM_FICHIER_LOGO_ENT, ADRESSE_ENT, CODE_POSTAL_ENT, VILLE_ENT, COURRIEL_ENT, NO_ENTREPRISE_DIRIGEANTE) values ('Cobalt Soul', 'C:\User\Anahno\CobaltSoul\logo.jpg', '32 soul avenue', 'C0B 1S0', 'Zadash', 'cobalt.soul@gmail.com', 1);
+-- Ajout Myriam
+insert into TP3_ENTREPRISE (NOM_ENT, NOM_FICHIER_LOGO_ENT, ADRESSE_ENT, CODE_POSTAL_ENT, VILLE_ENT, COURRIEL_ENT) values ('Cobalt Soul', 'C:\User\Kir\CobaltSoul\logo.jpg', '34 soul avenue', 'C0B 1S0', 'Zadash', 'cobalt.soul@gmail.com');
 
 insert into TP3_PROJET (CODE_PROJET, DATE_PRO, NOM_PRO, NO_ENTREPRISE) values ('A1B2', to_date('23-11-07','RR-MM-DD'), 'Order 66', 1);
 insert into TP3_PROJET (CODE_PROJET, DATE_PRO, NOM_PRO, NO_ENTREPRISE) values ('C3D4', to_date('23-11-07','RR-MM-DD'), 'Projet Nemesis', 2);
+--Ajouts Myriam
+insert into TP3_PROJET (CODE_PROJET, DATE_PRO, NOM_PRO, NO_ENTREPRISE) values ('F4D1', to_date('23-12-01','RR-MM-DD'), 'Reveil de la Force', 1);
+insert into TP3_PROJET (CODE_PROJET, DATE_PRO, NOM_PRO, NO_ENTREPRISE) values ('G1D4', to_date('23-12-01','RR-MM-DD'), 'Trouver Yoda', 2);
 
 insert into TP3_UTILISATEUR_PROJET (NO_UTILISATEUR, CODE_PROJET) values (1005, 'A1B2');
 insert into TP3_UTILISATEUR_PROJET (NO_UTILISATEUR, CODE_PROJET) values (1005, 'C3D4');
+-- Ajouts Myriam
+insert into TP3_UTILISATEUR_PROJET (NO_UTILISATEUR, CODE_PROJET) values (1005, 'F4D1');
+insert into TP3_UTILISATEUR_PROJET (NO_UTILISATEUR, CODE_PROJET) values (1005, 'G1D4');
 
 insert into TP3_PROFIL_ACCESSIBILITE (THEME_PROF, CODE_PROJET) values ('Jedi', 'A1B2');
-insert into TP3_PROFIL_ACCESSIBILITE (THEME_PROF, CODE_PROJET) values ('Sith', 'A1B2');
+insert into TP3_PROFIL_ACCESSIBILITE (THEME_PROF, CODE_PROJET) values ('Sith', 'G1D4');
 
 insert into TP3_PROFIL_ACCESSIBILITE_IMAGE (NO_PROFIL, HAUTEUR_IMA, LARGEUR_IMA) values (666, 004587, 036259);
 insert into TP3_PROFIL_ACCESSIBILITE_IMAGE (NO_PROFIL, HAUTEUR_IMA, LARGEUR_IMA) values (667, 004587, 036259);
@@ -213,21 +227,23 @@ insert into TP3_PROFIL_ACCESSIBILITE_PLAN (NO_PROFIL, HAUTEUR_PLA, LARGEUR_PLA) 
 insert into TP3_PROFIL_ACCESSIBILITE_PLAN_COORDONNEE (NO_PLAN, LONGITUDE_COO, LATITUDE_COO) values (1, 48.804568, 2.121241);
 insert into TP3_PROFIL_ACCESSIBILITE_PLAN_COORDONNEE (NO_PLAN, LONGITUDE_COO, LATITUDE_COO) values (2, -47.15, -126.716666);
 
-insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP2_NO_SONDAGE_SEQ.nextval, to_date('23-09-08','RR-MM-DD'), to_date('23-11-11','RR-MM-DD'), to_date('23-12-12','RR-MM-DD'), 'Order 66', 'A1B2');
-insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP2_NO_SONDAGE_SEQ.nextval, to_date('23-09-08','RR-MM-DD'), to_date('23-11-11','RR-MM-DD'), to_date('23-12-12','RR-MM-DD'), 'Chewbacca', 'A1B2');
-insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP2_NO_SONDAGE_SEQ.nextval, to_date('2000-01-01', 'RRRR-MM-DD'), to_date('2000-04-01', 'RRRR-MM-DD'), to_date('2000-04-30', 'RRRR-MM-DD'), 'Étoile de la mort', 'A1B2');
+insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('23-09-08','RR-MM-DD'), to_date('23-11-11','RR-MM-DD'), to_date('23-12-12','RR-MM-DD'), 'Order 66', 'A1B2');
+insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('23-09-08','RR-MM-DD'), to_date('23-11-11','RR-MM-DD'), to_date('23-12-12','RR-MM-DD'), 'Chewbacca', 'A1B2');
+insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('2000-01-01', 'RRRR-MM-DD'), to_date('2000-04-01', 'RRRR-MM-DD'), to_date('2000-04-30', 'RRRR-MM-DD'), 'Étoile de la mort', 'A1B2');
+-- Ajout Myriam
+insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('23-07-14', 'RRRR-MM-DD'), to_date('23-09-01', 'RRRR-MM-DD'), to_date('23-12-02', 'RRRR-MM-DD'), 'Ascension du jedi', 'C3D4');
 
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('MC04', 'Choix multiples 4 options');
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('RC22', 'Réponse courte');
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('RB11', 'À développement');
 
-insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP2_ID_QUESTION_SEQ.nextval, 002, 'MC04', 'Quel est le meilleur point d''accès pour un vaisseau?', 5000);
-insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP2_ID_QUESTION_SEQ.nextval, 004, 'MC04', 'Quel véhicule est le plus rapide?', 5200);
-insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP2_ID_QUESTION_SEQ.nextval, 006, 'MC04', 'Avec qui seriez-vous prêt à faire du co-voiturage?', 5200);
+insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 002, 'MC04', 'Quel est le meilleur point d''accès pour un vaisseau?', 5000);
+insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 004, 'MC04', 'Quel véhicule est le plus rapide?', 5200);
+insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 006, 'MC04', 'Avec qui seriez-vous prêt à faire du co-voiturage?', 5200);
 
-insert into TP3_CHOIX_REPONSE (ID_CHOIX_REPONSE, ORDRE_REPONSE, TEXTE_CHO, ID_QUESTION) values (TP2_ID_CHOIX_REPONSE_SEQ.nextval, 015, 'Plateforme d''atterrissage, Piste au sol, Spatioport, Clairière', 1);
-insert into TP3_CHOIX_REPONSE (ID_CHOIX_REPONSE, ORDRE_REPONSE, TEXTE_CHO, ID_QUESTION) values (TP2_ID_CHOIX_REPONSE_SEQ.nextval, 016, 'Motojet 74-Z, TIE, X-Wing T-65, Y-Wing BTL-S3', 2);
-insert into TP3_CHOIX_REPONSE (ID_CHOIX_REPONSE, ORDRE_REPONSE, TEXTE_CHO, ID_QUESTION) values (TP2_ID_CHOIX_REPONSE_SEQ.nextval, 017, 'Obi-wan Kenobi, Luke Skywalker, Darth Vader, Padme Amidala', 3);
+insert into TP3_CHOIX_REPONSE (ID_CHOIX_REPONSE, ORDRE_REPONSE, TEXTE_CHO, ID_QUESTION) values (TP3_ID_CHOIX_REPONSE_SEQ.nextval, 015, 'Plateforme d''atterrissage, Piste au sol, Spatioport, Clairière', 1);
+insert into TP3_CHOIX_REPONSE (ID_CHOIX_REPONSE, ORDRE_REPONSE, TEXTE_CHO, ID_QUESTION) values (TP3_ID_CHOIX_REPONSE_SEQ.nextval, 016, 'Motojet 74-Z, TIE, X-Wing T-65, Y-Wing BTL-S3', 2);
+insert into TP3_CHOIX_REPONSE (ID_CHOIX_REPONSE, ORDRE_REPONSE, TEXTE_CHO, ID_QUESTION) values (TP3_ID_CHOIX_REPONSE_SEQ.nextval, 017, 'Obi-wan Kenobi, Luke Skywalker, Darth Vader, Padme Amidala', 3);
 
 insert into TP3_REPONSE_UTILISATEUR (NO_UTILISATEUR, ID_CHOIX_REPONSE, TEXTE_REP) values (1000, 10000, 'Piste au sol');
 insert into TP3_REPONSE_UTILISATEUR (NO_UTILISATEUR, ID_CHOIX_REPONSE, TEXTE_REP) values (1000, 10001, 'X-Wing T-65');
