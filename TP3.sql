@@ -180,10 +180,10 @@ create table TP3_REPONSE_UTILISATEUR (
     constraint TP3_FK_RU_ID_CHOIX_REPONSE foreign key(ID_CHOIX_REPONSE)
         references TP3_CHOIX_REPONSE(ID_CHOIX_REPONSE));
         
---create or replace view TP2_ADMINISTRATEUR (COURRIEL_ADM, MOT_DE_PASSE_ADM, NOM_ADM, PRENOM_ADM) as
---    select COURRIEL_UTI, MOT_DE_PASSE_UTI, NOM_UTI, PRENOM_UTI 
---        from TP2_UTILISATEUR
---        where TYPE_UTI = 'Administrateur';
+create or replace view TP3_ADMINISTRATEUR (COURRIEL_ADM, MOT_DE_PASSE_ADM, NOM_ADM, PRENOM_ADM) as
+    select COURRIEL_UTI, MOT_DE_PASSE_UTI, NOM_UTI, PRENOM_UTI 
+        from TP3_UTILISATEUR
+        where TYPE_UTI = 'Administrateur';
         
 -- b
 insert into TP3_UTILISATEUR (NO_UTILISATEUR, COURRIEL_UTI, MOT_DE_PASSE_UTI, PRENOM_UTI, NOM_UTI, TYPE_UTI) values (TP3_NO_UTILISATEUR_SEQ.nextval, 'trym.tealeaf@gmail.com', TP3_FCT_GENERER_MOT_DE_PASSE(10), 'Trym', 'Tealeaf', 'Employé');
@@ -306,12 +306,24 @@ create table TP3_CHOIX_REPONSE_ARCHIVE (
     constraint TP3_FK_CHOARCH_ID_QUESTION foreign key(ID_QUESTION)
         references TP3_QUESTION_ARCHIVE(ID_QUESTION));
         
-create or replace procedure TP3_SP_ARCHIVER_SONDAGE(PI_DATE in date) is 
+create or replace procedure TP3_SP_ARCHIVER_SONDAGE(PI_DATE in date, PI_COURRIEL_ADMINISTRATEUR in varchar2) is 
     E_DATE_PLUS_PETIT_3_ANS exception;
+    V_EST_ADMINISTRATEUR number(1);
 begin
 if PI_DATE > add_months(sysdate, -12*3) then
     raise E_DATE_PLUS_PETIT_3_ANS;
 end if;
+
+    begin select 1
+            into V_VERIFICATION_COURRIEL_ADMIN
+            from TP3_ADMINISTRATEUR
+            where COURRIEL_ADM = PI_COURRIEL_ADMINISTRATEUR;
+            
+            exception
+                when NO_DATA_FOUND then
+                    dbms_output.put_line('Il faut être un administrateur pour pouvoir archiver un sondage.');
+    end;
+
 
 insert into TP3_SONDAGE_ARCHIVE
     select *
