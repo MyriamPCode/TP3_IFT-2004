@@ -232,14 +232,23 @@ insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN
 insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('2000-01-01', 'RRRR-MM-DD'), to_date('2000-04-01', 'RRRR-MM-DD'), to_date('2000-04-30', 'RRRR-MM-DD'), 'Étoile de la mort', 'A1B2');
 -- Ajout Myriam
 insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('23-07-14', 'RRRR-MM-DD'), to_date('23-09-01', 'RRRR-MM-DD'), to_date('23-12-02', 'RRRR-MM-DD'), 'Ascension du jedi', 'C3D4');
+insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('20-01-01','RR-MM-DD'), to_date('20-01-01','RR-MM-DD'), to_date('20-12-31','RR-MM-DD'), 'R2D2', 'A1B2');
+insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('19-01-01','RR-MM-DD'), to_date('19-01-01','RR-MM-DD'), to_date('19-12-31','RR-MM-DD'), 'Ahch-To', 'C3D4');
+insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('18-01-01','RR-MM-DD'), to_date('18-01-01','RR-MM-DD'), to_date('18-12-31','RR-MM-DD'), 'Retrouver Darth Vader', 'G1D4');
 
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('MC04', 'Choix multiples 4 options');
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('RC22', 'Réponse courte');
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('RB11', 'À développement');
+--Ajouts Myriam
+insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('BD18', 'Vrai ou Faux');
+insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('MV11', 'Choix multiples 6 options');
 
 insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 002, 'MC04', 'Quel est le meilleur point d''accès pour un vaisseau?', 5000);
-insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 004, 'MC04', 'Quel véhicule est le plus rapide?', 5200);
+insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 004, 'MV11', 'Quel véhicule est le plus rapide?', 5200);
 insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 006, 'MC04', 'Avec qui seriez-vous prêt à faire du co-voiturage?', 5200);
+-- Ajouts Myriam 
+insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 006, 'BD18', 'R2D2 a-t-il besoin d''etre recalibrer?', 5000);
+insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 006, 'RB11', 'Quelle est la faiblesse de l''etoile de la mort?', 5000);
 
 insert into TP3_CHOIX_REPONSE (ID_CHOIX_REPONSE, ORDRE_REPONSE, TEXTE_CHO, ID_QUESTION) values (TP3_ID_CHOIX_REPONSE_SEQ.nextval, 015, 'Plateforme d''atterrissage, Piste au sol, Spatioport, Clairière', 1);
 insert into TP3_CHOIX_REPONSE (ID_CHOIX_REPONSE, ORDRE_REPONSE, TEXTE_CHO, ID_QUESTION) values (TP3_ID_CHOIX_REPONSE_SEQ.nextval, 016, 'Motojet 74-Z, TIE, X-Wing T-65, Y-Wing BTL-S3', 2);
