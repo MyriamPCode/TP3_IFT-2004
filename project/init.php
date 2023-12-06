@@ -1,5 +1,7 @@
 <?php
-$conn = oci_connect('', '', 'fsg-p-ora01.fsg.ulaval.ca:1521/ora19c.fsg.ulaval.ca', 'AL32UTF8');
+include 'credentials.php';
+
+$conn = oci_connect($username, $password, 'fsg-p-ora01.fsg.ulaval.ca:1521/ora19c.fsg.ulaval.ca', 'AL32UTF8');
 $where = '';
 if(isset($_POST['Suivant']) ){
     $where = " where NO_UTILISATEUR > ". $_POST['NO_UTILISATEUR'];
