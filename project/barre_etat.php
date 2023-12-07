@@ -16,38 +16,12 @@
         <li><a href="index.php">Connexion</a></li>
     </ul>
 </div>
-
-<?php
-
-// Vérifiez le formulaire de connexion et définissez la session si l'authentification réussit
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Vérifiez les informations de connexion (exemple)
-    $utilisateurValide = true; // Remplacez ceci par votre logique d'authentification
-
-    if ($utilisateurValide) {
-        // Démarrez la session si ce n'est pas déjà fait
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        // Définissez les informations de l'utilisateur dans la session (exemple)
-        $_SESSION['utilisateur'] = [
-            'prenom' => 'John',
-            'nom' => 'Doe',
-            'type' => 'Utilisateur', // Remplacez par le type d'utilisateur approprié
-        ];
-
-        // Redirigez vers la page d'accueil ou une autre page sécurisée
-        header('Location: index.php');
-        exit();
-    }
-}
-?>
+<?php include 'init.php'; ?>
 
 <?php
 // bare-etat.php
 
-// Démarrez la session si ce n'est pas déjà fait
+// Démarrer la session si ce n'est pas déjà fait
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -57,19 +31,29 @@ function estConnecte() {
     return isset($_SESSION['utilisateur']);
 }
 
-// Fonction pour afficher l'état de connexion
+// Fonction pour afficher le lien de connexion ou l'état connecté
 function afficherEtatConnexion() {
+    // Si l'utilisateur est connecté
     if (estConnecte()) {
-        // Utilisateur connecté
-        $prenomNom = $_SESSION['utilisateur']['prenom'] . ' ' . $_SESSION['utilisateur']['nom'];
-        $typeUtilisateur = $_SESSION['utilisateur']['type'];
-        echo "Bienvenue $prenomNom ($typeUtilisateur) - <a href='deconnexion.php'>Déconnecter</a>";
+        $prenomNom = $_SESSION['utilisateur']['PRENOM_UTI'] . ' ' . $_SESSION['utilisateur']['NOM_UTI'];
+        $typeUtilisateur = $_SESSION['utilisateur']['TYPE_UTI'];
+
+        echo "Bienvenue $prenomNom ($typeUtilisateur) - <a href='index.php'>Déconnecter</a>";
     } else {
-        // Utilisateur non connecté
+        // Si l'utilisateur n'est pas connecté
         echo "<a href='index.php'>Connexion</a>";
     }
 }
 
+// Traitement de la déconnexion
+if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') {
+    // Détruire la session
+    session_destroy();
+    
+    // Rediriger vers la page d'accueil
+    header('Location: index.php');
+    exit();
+}
 ?>
 
 </body>
