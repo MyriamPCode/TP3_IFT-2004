@@ -7,6 +7,80 @@
 
 <body>
 <?php include 'header.php'; ?>
+<?php 
+session_start();
+
+// Vérifier si l'utilisateur est déjà connecté
+if (isset($_SESSION['utilisateur'])) {
+    // Rediriger vers la page appropriée en fonction du type d'utilisateur
+    switch ($_SESSION['utilisateur']['TYPE_UTI']) {
+        case 'Administrateur':
+            header('Location: liste_sondages.php'); // Remplacez par le nom de la page des sondages pour les administrateurs
+            exit();
+        case 'Responsable':
+            header('Location: liste_sondages_responsable.php'); // Remplacez par le nom de la page des sondages pour les responsables
+            exit();
+        case 'Employé':
+            header('Location: liste_sondages_employe.php'); // Remplacez par le nom de la page des sondages pour les employés
+            exit();
+    }
+}
+
+// Traitement du formulaire de connexion
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $courriel = $_POST['courriel'];
+    $mot_de_passe = $_POST['mot_de_passe'];
+
+    // Remplacez par votre logique de vérification du nom d'utilisateur et du mot de passe
+    $utilisateur_valide = validerUtilisateur($courriel, $mot_de_passe);
+    
+    if ($utilisateur_valide) {
+        // Enregistrez l'utilisateur dans la session
+        $_SESSION['utilisateur'] = $utilisateur_valide;
+        
+        // Redirection vers la page appropriée en fonction du type d'utilisateur
+        redirigerVersPageAppropriate($_SESSION['utilisateur']['TYPE_UTI']);
+    } else {
+        // Afficher un message d'erreur
+        $message_erreur = "La combinaison nom d'utilisateur + mot de passe est invalide.";
+    }
+}
+        
+
+function validerUtilisateur($courriel, $mot_de_passe) {
+    // Utilisez PDO pour interagir avec la base de données
+    $bdd = new PDO('mysql:host=Votre_Hote;dbname=Votre_Base_De_Donnees;charset=utf8', $username, $password);
+    
+    // Requête préparée pour récupérer les informations de l'utilisateur
+    $requete = $bdd->prepare("SELECT * FROM TP3_UTILISATEUR WHERE COURRIEL_UTI = :courriel AND MOT_DE_PASSE_UTI = :mot_de_passe");
+    $requete->bindParam(':courriel', $courriel);
+    $requete->bindParam(':mot_de_passe', $mot_de_passe);
+    $requete->execute();
+    
+    // Récupérer le résultat
+    $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
+    
+    // Fermer la connexion à la base de données
+    $bdd = null;
+    
+    return $utilisateur;
+}
+
+function redirigerVersPageAppropriate($typeUtilisateur) {
+    switch ($typeUtilisateur) {
+        case 'Administrateur':
+            header('Location: liste_sondages.php'); // Remplacez par le nom de la page des sondages pour les administrateurs
+            exit();
+        case 'Responsable':
+            header('Location: liste_sondages_responsable.php'); // Remplacez par le nom de la page des sondages pour les responsables
+            exit();
+        case 'Employé':
+            header('Location: liste_sondages_employe.php'); // Remplacez par le nom de la page des sondages pour les employés
+            exit();
+    }
+}
+
+?>
 
 <form method="post" action="principal.php">
 	<p>
