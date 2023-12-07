@@ -4,6 +4,7 @@
 // Inclure la barre d'état et le header
 include('barre_etat.php');
 include('header.php');
+include ('init.php');
 
 // Vérifier si l'utilisateur est connecté en tant qu'employé
 if (!estConnecte() || $_SESSION['utilisateur']['TYPE_UTI'] !== 'Employé') {
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
     }
     
-    $bdd = new PDO('mysql:host=Votre_Hote;dbname=Votre_Base_De_Donnees;charset=utf8', 'Votre_Utilisateur', 'Votre_Mot_De_Passe');
+    $bdd = session_start();
     
     // Boucle à travers les questions du formulaire
     foreach ($questions as $question) {
