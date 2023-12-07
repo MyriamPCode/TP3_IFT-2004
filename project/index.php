@@ -20,6 +20,8 @@
     <input type="submit" value="Submit" />
 </form>
 
+<!-- Valider que le username et le password sont valide et present dans la base de donnees -->
+
 <?php include 'footer.php'; ?>
 </body>
 
