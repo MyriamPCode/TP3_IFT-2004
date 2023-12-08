@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 include 'init.php';
 
 
@@ -14,7 +15,7 @@ $titreSondage = "";
 
 if(($question = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS))!= false){
     $noOrdreQuestion = $question["ORDRE_QUESTION"];
-    $typeQuestion = $question["CODE_TYPE_QUESTION"];
+    $typeQuestion = $question['CODE_TYPE_QUESTION'];
     $texteQuestion = $question["TEXTE_QUE"];
     $titreSondage = $question["NO_SONDAGE"];
     $erreur = "";
@@ -22,8 +23,15 @@ if(($question = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS))!= false){
     $erreur = "Aucune question associé avec ce sondage";
 }
 
+$where = " where CODE_TYPE_QUESTION = " . $typeQuestion;
 
-
+$stid = oci_parse($conn, 'select * from TP3_TYPE_QUESTION ' . $where . ' fetch first 1 rows only');
+oci_execute($stid);
+$descTypeQue = "";
+if(($typeQuestion = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS))!= false){
+    $descTypeQue = $typeQuestion["DESC_TYPE_QUE"];
+}
+    
 $stid = oci_parse($conn, 'select * from TP3_CHOIX_REPONSE ' . $where . 'order by ORDRE_REPONSE');
 oci_execute($stid);
 
@@ -63,9 +71,6 @@ $tableauChoixRep .= '</table>';
 
     
 oci_close($conn);
-
-
-
 ?>
 
 <html>
@@ -77,13 +82,15 @@ oci_close($conn);
 <body>
 <?php include 'header.php'; ?>
 <?php include 'barre_etat.php'; ?>
+
+<?php echo $erreur;?><br>
 <form method="post" action="voir_question.php">
 <p>
-Sondage: <input type="text" name="NO_SONDAGE" value="<?php $titreSondage?>"><br>
+Sondage: <input type="text" name="NO_SONDAGE" value="<?php echo $titreSondage?>"><br>
 Question<br>
-Ordre: <input type="text" name="ORDRE_QUESTION" value="<?php $noOrdreQuestion?>"><br>
-Type: <input type="text" name="CODE_TYPE_QUESTION" value="<?php $typeQuestion?>"><br>
-Texte: <input type="text" name="TEXTE_QUE" value="<?php $texteQuestion?>"><br>
+Ordre: <input type="text" name="ORDRE_QUESTION" value="<?php echo $noOrdreQuestion?>"><br>
+Type: <input type="text" name="DESC_TYPE_QUE" value="<?php echo $descTypeQue?>"><br>
+Texte: <input type="text" name="TEXTE_QUE" value="<?php echo $texteQuestion?>" size="100"><br>
 Réponse
 <?php echo $tableauChoixRep;?>
     
