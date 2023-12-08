@@ -1,3 +1,6 @@
+<?php 
+echo $_SESSION;
+?>
 <table>
 	<tr>
 		<th>Numéro</th>
