@@ -2,13 +2,6 @@
 session_start();
 include 'init.php';
 
-if(empty($_SESSION)){
-    header('Location: index.php');
-}
-if(isset($_SESSION) ){
-    //Si ok on peut traiter le voir_question.php, sinon retour à index.php
-    $conn = $_SESSION;
-}
 
 $where = " where ID_QUESTION = ". $_POST['ID_QUESTION'];
 
@@ -87,7 +80,7 @@ oci_close($conn);
 <form method="post" action="voir_question.php">
 <p>
 Sondage: <input type="text" name="NO_SONDAGE" value="<?php $titreSondage?>"><br>
-Question
+Question<br>
 Ordre: <input type="text" name="ORDRE_QUESTION" value="<?php $noOrdreQuestion?>"><br>
 Type: <input type="text" name="CODE_TYPE_QUESTION" value="<?php $typeQuestion?>"><br>
 Texte: <input type="text" name="TEXTE_QUE" value="<?php $texteQuestion?>"><br>
