@@ -29,7 +29,7 @@ function performDatabaseQuery($query) {
     global $conn;
     $stid = oci_parse($conn, $query);
     oci_execute($stid);
-    return $stid;
+    return oci_fetch_object($stid);
 }
 
 function closeDatabaseConnection() {

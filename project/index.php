@@ -14,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $noUtilisateur = $_POST['noUser'];
     $mdpUtilisateur = $_POST['mdpUser'];
     
-    $selectUser = 'SELECT * FROM TP3_UTILISATEUR WHERE NO_UTILISATEUR =' . $noUtilisateur . 'AND MOT_DE_PASSE_UTI = ' . $mdpUtilisateur;
-    echo "hello" . $selectUser;
+    $selectUser = "SELECT * FROM TP3_UTILISATEUR WHERE NO_UTILISATEUR = " . $noUtilisateur . " AND MOT_DE_PASSE_UTI = '" . $mdpUtilisateur . "'";
+    $queryResult = performDatabaseQuery($selectUser)->NO_UTILISATEUR;
     
-    if(performDatabaseQuery($selectUser) != false){
+    if($queryResult > -1){
         // Authentication successful
         session_start();
         $_SESSION["noUser"] = $noUtilisateur;
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         header("Location: principal.php");
         exit();
     } else {
-        // Authentication failed
+        // Authentication failed      
         echo "<p>Numéro utilisateur ou mot de passe invalide.</p>";
     }
 }
