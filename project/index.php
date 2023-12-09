@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $mdpUtilisateur = $_POST['mdpUser'];
     
     $selectUser = "SELECT * FROM TP3_UTILISATEUR WHERE NO_UTILISATEUR = " . $noUtilisateur . " AND MOT_DE_PASSE_UTI = '" . $mdpUtilisateur . "'";
-    $queryResult = performDatabaseQuery($selectUser);
+    $queryResult = oci_fetch_object(performDatabaseQuery($selectUser));
     
     if($queryResult -> NO_UTILISATEUR > -1){
         // Authentication successful
