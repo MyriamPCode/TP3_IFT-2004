@@ -11,6 +11,9 @@
 <?php session_start(); ?>
 <?php include 'barre_etat.php' ?>
 
+<?php session_start(); ?>
+
+
 <table>
 	<tr>
 		<th>Numéro</th>
