@@ -6,7 +6,7 @@ include('header.php');
 include('init.php');
 
 // Redirection vers la page d'accueil si l'utilisateur n'est pas connecté en tant que salarié
-if (!estConnecte() || $_SESSION['utilisateur']['TYPE_UTI'] !== 'Employé') {
+if (!estConnecte() || $_SESSION['TYPE_UTI'] !== 'Employé') {
     header('Location: index.php');
     exit();
 }
@@ -70,6 +70,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php afficherEtatConnexion(); ?>
 </div>
 
+<?php
+$selectQuestion = "SELECT * FROM TP3_TYPE_QUESTION";
+$queryResult = performDatabaseQuery($selectQuestion);
+
+$questions [
+    [
+        'ID_QUESTION' => $queryResult -> ID_QUESTION,
+        'ORDRE_QUESTION' => $queryResult -> ORDRE_QUESTION,
+        'CODE_TYPE_QUESTION' => $queryResult -> CODE_TYPE_QUESTION,
+        'TEXTE_QUE' => $queryResult -> TEXTE_QUE,
+        'NO_SONDAGE' => $queryResult -> NO_SONDAGE,
+    ]
+    ];
+?>
+
 <h2>Liste des Questions</h2>
 
 <form method="post" action="liste_questions.php">
@@ -77,16 +92,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div>
             <p><?php echo $question['ORDRE_QUESTION']; ?>. <?php echo $question['TEXTE_QUE']; ?></p>
 
-            <?php if ($question['TYPE_QUE'] === 'Vrai/Faux') : ?>
+            <?php if ($question['CODE_TYPE_QUESTION'] === 'BD18') : ?>
                 <label><input type="radio" name="reponse_<?php echo $question['ID_QUESTION']; ?>" value="Vrai"> Vrai</label>
                 <label><input type="radio" name="reponse_<?php echo $question['ID_QUESTION']; ?>" value="Faux"> Faux</label>
-            <?php elseif ($question['TYPE_QUE'] === 'Choix Multiple') : ?>
+            <?php elseif ($question['CODE_TYPE_QUESTION'] === 'MC04') : ?>
                 <?php foreach ($question['options'] as $option) : ?>
                     <label><input type="radio" name="reponse_<?php echo $question['ID_QUESTION']; ?>" value="<?php echo $option['ID_CHOIX_REPONSE']; ?>">
                         <?php echo $option['TEXTE_CHO']; ?>
                     </label>
                 <?php endforeach; ?>
-            <?php elseif ($question['TYPE_QUE'] === 'À Développement') : ?>
+            <?php elseif ($question['CODE_TYPE_QUESTION'] === 'RB11') : ?>
                 <textarea name="reponse_<?php echo $question['ID_QUESTION']; ?>"></textarea>
             <?php endif; ?>
         </div>
