@@ -236,12 +236,12 @@ insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN
 insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('19-01-01','RR-MM-DD'), to_date('19-01-01','RR-MM-DD'), to_date('19-12-31','RR-MM-DD'), 'Ahch-To', 'C3D4');
 insert into TP3_SONDAGE (NO_SONDAGE, DATE_CREATION_SON, DATE_DEBUT_SON, DATE_FIN_SON, TITRE_SON, CODE_PROJET) values (TP3_NO_SONDAGE_SEQ.nextval, to_date('18-01-01','RR-MM-DD'), to_date('18-01-01','RR-MM-DD'), to_date('18-12-31','RR-MM-DD'), 'Retrouver Darth Vader', 'G1D4');
 
-insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('MC04', 'Choix multiples 4 options');
+insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('MC04', 'Choix multiples');
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('RC22', 'Réponse courte');
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('RB11', 'À développement');
 --Ajouts Myriam
 insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('BD18', 'Vrai ou Faux');
-insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('MV11', 'Choix multiples 6 options');
+insert into TP3_TYPE_QUESTION (CODE_TYPE_QUESTION, DESC_TYPE_QUE) values ('MV11', 'Choix multiples');
 
 insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 002, 'MC04', 'Quel est le meilleur point d''accès pour un vaisseau?', 5000);
 insert into TP3_QUESTION (ID_QUESTION, ORDRE_QUESTION, CODE_TYPE_QUESTION, TEXTE_QUE, NO_SONDAGE) values (TP3_ID_QUESTION_SEQ.nextval, 004, 'MV11', 'Quel véhicule est le plus rapide?', 5200);
