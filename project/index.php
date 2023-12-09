@@ -15,13 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $mdpUtilisateur = $_POST['mdpUser'];
     
     $selectUser = "SELECT * FROM TP3_UTILISATEUR WHERE NO_UTILISATEUR = " . $noUtilisateur . " AND MOT_DE_PASSE_UTI = '" . $mdpUtilisateur . "'";
-    $queryResult = performDatabaseQuery($selectUser)->NO_UTILISATEUR;
+    $queryResult = performDatabaseQuery($selectUser);
     
-    if($queryResult > -1){
+    if($queryResult -> NO_UTILISATEUR > -1){
         // Authentication successful
         session_start();
         $_SESSION["noUser"] = $noUtilisateur;
         $_SESSION["estConnecté"] = 1;
+        $_SESSION['typeUser'] = $queryResult -> TYPE_UTI;
+        $_SESSION['prenom'] = $queryResult -> PRENOM_UTI;
+        $_SESSION['nom'] = $queryResult -> NOM_UTI;
         header("Location: principal.php");
         exit();
     } else {

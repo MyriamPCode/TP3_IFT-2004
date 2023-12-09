@@ -1,6 +1,16 @@
-<?php 
-echo $_SESSION;
-?>
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>TP3 - Équipe 10</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"/>
+</head>
+
+<body>
+
+<?php session_start(); ?>
+<?php include 'barre_etat.php' ?>
+
 <table>
 	<tr>
 		<th>Numéro</th>
@@ -12,3 +22,5 @@ echo $_SESSION;
 		<th>Modifier</th>
 	</tr>
 </table>
+
+</body>
