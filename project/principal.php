@@ -18,8 +18,16 @@
 		<th>Titre</th>
 		<th>Date de début</th>
 		<th>Date de fin</th>
-		<th>Rapport</th>
-		<th>Modifier</th>
+		<?php 
+		if ($_SESSION['typeUser'] != "Employé") {
+		    echo "<th>Rapport</th>\n";
+		}
+		
+		if ($_SESSION['typeUser'] === 'Administrateur') {
+		    echo "<th>Modifier</th>\n";
+		}
+		?>
+		
 	</tr>
 	<?php 
 	   $selectSondages = "SELECT * FROM TP3_SONDAGE";
@@ -36,9 +44,13 @@
 	               echo "<td>" . $sondage[$item] . "</td>\n";
 	           }
            }
+           if ($_SESSION['typeUser'] != "Employé") {
+               echo "<td><a href='rapport.php'>Rapport</a></td>\n";
+           }
            
-           echo "<td><a href='rapport.php'>Rapport</a></td>\n";
-           echo "<td><a href='sondage_edit.php&NO_SONDAGE=<". $sondage['NO_SONDAGE'] .">''>Modifier</a></td>\n";
+           if ($_SESSION['typeUser'] === 'Administrateur') {
+               echo "<td><a href='sondage_edit.php&NO_SONDAGE=<". $sondage['NO_SONDAGE'] .">''>Modifier</a></td>\n";
+           }
            echo "</tr>\n";
 	   }
 	   
@@ -54,7 +66,11 @@
 		<th>Titre</th>
 		<th>Date de début</th>
 		<th>Date de fin</th>
-		<th>Rapport</th>
+		<?php 
+		if ($_SESSION['typeUser'] != "Employé") {
+		    echo "<th>Rapport</th>\n";
+		}
+	?>
 	</tr>
 	<?php 
 	   $selectSondages = "SELECT * FROM TP3_SONDAGE_ARCHIVE";
@@ -72,7 +88,9 @@
 	           }
            }
            
-           echo "<td><a href='rapport.php'>Rapport</a></td>\n";
+           if ($_SESSION['typeUser'] != "Employé") {
+               echo "<td><a href='rapport.php'>Rapport</a></td>\n";
+           }
            echo "</tr>\n";
 	   }
 	   
