@@ -58,6 +58,7 @@
 	?>
 </table>
 
+<?php if ($_SESSION['typeUser'] != "Employé") :  ?>
 <h2>Sondages archivés</h2>
 <table>
 	<tr>
@@ -70,7 +71,7 @@
 		if ($_SESSION['typeUser'] != "Employé") {
 		    echo "<th>Rapport</th>\n";
 		}
-	?>
+	   ?>
 	</tr>
 	<?php 
 	   $selectSondages = "SELECT * FROM TP3_SONDAGE_ARCHIVE";
@@ -97,5 +98,6 @@
 	   closeDatabaseConnection();
 	?>
 </table>
+<?php endif; ?>
 
 </body>
