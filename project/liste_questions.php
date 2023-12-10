@@ -1,10 +1,11 @@
 <?php
 // liste_questions.php
 
-include('barre-etat.php');
-include('header.php');
-include('init.php');
+include 'barre_etat.php';
+include 'header.php';
+include 'init.php';
 
+estConnecte(); 
 // Redirection vers la page d'accueil si l'utilisateur n'est pas connecté en tant que salarié
 if (!estConnecte() || $_SESSION['TYPE_UTI'] !== 'Employé') {
     header('Location: index.php');
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $reponseFieldName = 'reponse_' . $idQuestion;
         
         // Obtenir la réponse du formulaire
-        $reponse = $_POST[$reponseFieldName] ?? null;
+        $reponse = isset($_POST[$reponseFieldName]) ? $_POST[$reponseFieldName] : null;
         
         // Insérer ou mettre à jour la réponse dans la base de données
         $sql = "INSERT INTO TP3_REPONSE_UTILISATEUR (NO_UTILISATEUR, ID_CHOIX_REPONSE, TEXTE_REP)
@@ -40,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ON DUPLICATE KEY UPDATE TEXTE_REP = :texteRep";
         
         $requete = performDatabaseQuery($sql, [
-            ':noUtilisateur' => $_SESSION['utilisateur']['NO_UTILISATEUR'],
+            ':noUtilisateur' => $_SESSION['NO_UTILISATEUR'],
             ':idChoixReponse' => $reponse,
-            ':texteRep' => $_POST['reponse_texte_' . $idQuestion] ?? null, // Si c'est une question ouverte
+            ':texteRep' => isset($_POST['reponse_texte_' . $idQuestion]) ? $_POST['reponse_texte_' . $idQuestion] : null, // Si c'est une question ouverte
         ]);
     }
     
@@ -61,17 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<?php include 'init.php' ?>
-<?php include 'header.php'; ?>
-<?php include 'barre_etat.php' ?>
-
-
 <div id="etat-connexion">
     <?php afficherEtatConnexion(); ?>
 </div>
 
 <?php
-$selectQuestion = "SELECT * FROM TP3_TYPE_QUESTION";
+$selectQuestion = "SELECT * FROM TP3_OPTIONS WHERE ID_QUESTION = " . $question['ID_QUESTION'];
 $queryResult = performDatabaseQuery($selectQuestion);
 
 $questions [
