@@ -30,11 +30,11 @@ if (isset($_SESSION['utilisateur'])) {
 
 // Traitement du formulaire de connexion
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $courriel = $_POST['courriel'];
-    $mot_de_passe = $_POST['mot_de_passe'];
-
+    $noUtilisateur = $_POST['noUser'];
+    $mdpUtilisateur = $_POST['mdpUser'];
+    
     // Remplacez par votre logique de vérification du nom d'utilisateur et du mot de passe
-    $utilisateur_valide = validerUtilisateur($courriel, $mot_de_passe);
+    $utilisateur_valide = validerUtilisateur($noUtilisateur, $mdpUtilisateur);
     
     if ($utilisateur_valide) {
         // Enregistrez l'utilisateur dans la session
@@ -44,19 +44,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirigerVersPageAppropriate($_SESSION['utilisateur']['TYPE_UTI']);
     } else {
         // Afficher un message d'erreur
-        $message_erreur = "La combinaison nom d'utilisateur + mot de passe est invalide.";
+        $message_erreur = "La combinaison numéro utilisateur + mot de passe est invalide.";
     }
 }
-        
 
-function validerUtilisateur($courriel, $mot_de_passe) {
+function validerUtilisateur($noUtilisateur, $mdpUtilisateur) {
     // Utilisez PDO pour interagir avec la base de données
     $bdd = new PDO('mysql:host=Votre_Hote;dbname=Votre_Base_De_Donnees;charset=utf8', $username, $password);
     
     // Requête préparée pour récupérer les informations de l'utilisateur
-    $requete = $bdd->prepare("SELECT * FROM TP3_UTILISATEUR WHERE COURRIEL_UTI = :courriel AND MOT_DE_PASSE_UTI = :mot_de_passe");
-    $requete->bindParam(':courriel', $courriel);
-    $requete->bindParam(':mot_de_passe', $mot_de_passe);
+    $requete = $bdd->prepare("SELECT * FROM TP3_UTILISATEUR WHERE NO_UTILISATEUR = :noUtilisateur AND MOT_DE_PASSE_UTI = :mdpUtilisateur");
+    $requete->bindParam(':noUtilisateur', $noUtilisateur);
+    $requete->bindParam(':mdpUtilisateur', $mdpUtilisateur);
     $requete->execute();
     
     // Récupérer le résultat
