@@ -10,9 +10,9 @@
 
 <?php 
 session_start();
+include 'init.php';
 include 'header.php';
 include 'barre_etat.php';
-include 'init.php'; 
 ?>
 
 <h2>Sondages en cours</h2>
@@ -58,9 +58,7 @@ include 'init.php';
            }
            echo "</tr>\n";
 	   }
-	   
-	   closeDatabaseConnection();
-	?>
+	   	?>
 </table>
 
 <?php if ($_SESSION['typeUser'] != "Employé") :  ?>
@@ -99,10 +97,9 @@ include 'init.php';
            }
            echo "</tr>\n";
 	   }
-	   
-	   closeDatabaseConnection();
-	?>
+	   	?>
 </table>
 <?php endif; ?>
+<?php include 'footer.php'; ?>
 
 </body>

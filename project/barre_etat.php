@@ -1,6 +1,14 @@
-<?php
-include 'init.php';
-    
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"/>
+    <title>Accueil</title>
+</head>
+<body>
+
+<?php    
 // Fonction pour vérifier si l'utilisateur est connecté
 function estConnecte() {
     return isset($_SESSION["estConnecté"]) && $_SESSION["estConnecté"] == 1;
@@ -22,23 +30,8 @@ function afficherEtatConnexion() {
 afficherEtatConnexion();
 ?>
 
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-</head>
-<body>
-
-<!-- Votre contenu de page d'accueil ici -->
-
-<div id="menu">
-    <ul>
-        <!-- Autres éléments de menu ici si nécessaire -->
-
-        <!-- Lien de connexion -->
-        <li><a href="index.php">Connexion</a></li>
-    </ul>
-</div>
+<!-- Si l'utilisateur n'est pas connecté on redirige à la page connexion (index.html).
+Il est inutile de rajouter un lien pour retourner à la page de connexion pour se connecter 
+lorsqu'un utilisateur est déjà connecter. -->
 </body>
 </html>
