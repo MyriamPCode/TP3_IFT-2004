@@ -8,9 +8,12 @@
 
 <body>
 
-<?php session_start(); ?>
-<?php include 'barre_etat.php' ?>
-<?php include 'init.php' ?>
+<?php 
+session_start();
+include 'header.php';
+include 'barre_etat.php';
+include 'init.php'; 
+?>
 
 <h2>Sondages en cours</h2>
 <table>

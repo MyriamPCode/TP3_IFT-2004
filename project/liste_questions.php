@@ -6,9 +6,9 @@ estConnecte();
 if (!estConnecte() || $_SESSION['TYPE_UTI'] !== 'Employé') {
     if (!estConnecte() || $_SESSION['utilisateur']['TYPE_UTI'] !== 'Employé') {
         // Inclure la barre d'état et le header
-        include 'barre_etat.php';
-        include'header.php';
+        include 'header.php';
         include 'init.php';
+        include 'barre_etat.php';
         
         // Vérifier si l'utilisateur est connecté en tant qu'employé
         if (!estConnecte() || $_SESSION['utilisateur']['TYPE_UTI'] !== 'Employé') {
