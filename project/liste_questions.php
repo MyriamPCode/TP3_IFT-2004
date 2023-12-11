@@ -91,6 +91,7 @@ if (!estConnecte() || $_SESSION['TYPE_UTI'] !== 'Employé') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"/>
     <title>Liste des Questions</title>
 </head>
 <body>
@@ -106,7 +107,7 @@ if (!estConnecte() || $_SESSION['TYPE_UTI'] !== 'Employé') {
 </div>
 
 <?php
-$selectQuestion = "SELECT * FROM TP3_OPTIONS WHERE ID_QUESTION = " . $question['ID_QUESTION'];
+$selectQuestion = "SELECT * FROM TP3_QUESTION WHERE ID_QUESTION = " . $question['ID_QUESTION'];
 $queryResult = performDatabaseQuery($selectQuestion);
 
 $questions [
