@@ -16,9 +16,9 @@ $noUtilisateur = "";
 $mdpUtilisateur = "";
 
 if(($utilisateur = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) != false){
-        $nomUtilisateur = $utilisateur["NOM_UTI"]; $erreur = "";
-        $noUtilisateur = $utilisateur["NO_UTILISATEUR"];
-        $mdpUtilisateur = $utilisateur["MOT_DE_PASSE_UTI"];
+    $nomUtilisateur = $utilisateur["NOM_UTI"]; $erreur = "";
+    $noUtilisateur = $utilisateur["NO_UTILISATEUR"];
+    $mdpUtilisateur = $utilisateur["MOT_DE_PASSE_UTI"];
 }else{
     $erreur = "Aucun utilisateur ne correspond à la requête";
 }
@@ -29,7 +29,7 @@ function performDatabaseQuery($query) {
     global $conn;
     $stid = oci_parse($conn, $query);
     oci_execute($stid);
-    return oci_fetch_object($stid);
+    return $stid;
 }
 
 function closeDatabaseConnection() {
