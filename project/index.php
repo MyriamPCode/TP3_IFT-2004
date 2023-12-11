@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $_SESSION['typeUser'] = $queryResult -> TYPE_UTI;
         $_SESSION['prenom'] = $queryResult -> PRENOM_UTI;
         $_SESSION['nom'] = $queryResult -> NOM_UTI;
+        $_SESSION['recherche'] = 0;
         header("Location: liste_sondages.php");
         exit();
     } else {

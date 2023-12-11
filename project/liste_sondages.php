@@ -15,6 +15,22 @@ include 'header.php';
 include 'barre_etat.php';
 ?>
 
+<button>
+	<a href='sondage_rechercher.php'>Rechercher</a>
+</button>
+
+<?php if ($_SESSION['recherche']) :  ?>
+<button>
+	<a href='#'>Tous</a>
+</button>
+<?php endif; ?>
+
+<?php if ($_SESSION['typeUser'] != "Employé") :  ?>
+<button>
+	<a href='sondage_edit.php'>Créer</a>
+</button>
+<?php endif; ?>
+
 <h2>Sondages en cours</h2>
 <table>
 	<tr>
@@ -97,7 +113,7 @@ include 'barre_etat.php';
            }
            echo "</tr>\n";
 	   }
-	   	?>
+	?>
 </table>
 <?php endif; ?>
 <?php include 'footer.php'; ?>
