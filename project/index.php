@@ -9,6 +9,7 @@
 <body>
 <?php include 'init.php'; ?>
 <?php include 'header.php'; ?>
+<?php include 'barre_etat.php'; ?>
 <?php 
 session_start();
 
