@@ -1,6 +1,5 @@
 <?php 
 session_start();
-
 include 'init.php';
 
 //include 'barre_etat.php';

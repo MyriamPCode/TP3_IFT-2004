@@ -8,9 +8,12 @@
 
 <body>
 
-<?php session_start(); ?>
-<?php include 'barre_etat.php' ?>
-<?php include 'init.php' ?>
+<?php 
+session_start();
+include 'init.php';
+include 'header.php';
+include 'barre_etat.php';
+?>
 
 <h2>Sondages en cours</h2>
 <table>
@@ -55,9 +58,7 @@
            }
            echo "</tr>\n";
 	   }
-	   
-	   closeDatabaseConnection();
-	?>
+	   	?>
 </table>
 
 <?php if ($_SESSION['typeUser'] != "Employé") :  ?>
@@ -96,10 +97,9 @@
            }
            echo "</tr>\n";
 	   }
-	   
-	   closeDatabaseConnection();
-	?>
+	   	?>
 </table>
 <?php endif; ?>
+<?php include 'footer.php'; ?>
 
 </body>

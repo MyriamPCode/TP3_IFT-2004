@@ -1,9 +1,10 @@
-
+<!DOCTYPE html>
 <html>
 <head>
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"/>
 </head>
 <body>
-	<p> <img src="<?php echo "img/mobilit.png";?>" width="100"> Mobili-T</p>
+	<img src="img/mobilit.png" width="100">
+	<p> Mobili-T</p>
 </body>
 </html>

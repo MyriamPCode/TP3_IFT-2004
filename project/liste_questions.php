@@ -2,96 +2,89 @@
 // liste_questions.php
 
 estConnecte();
+include 'init.php';
+
 // Redirection vers la page d'accueil si l'utilisateur n'est pas connecté en tant que salarié
 if (!estConnecte() || $_SESSION['TYPE_UTI'] !== 'Employé') {
-    if (!estConnecte() || $_SESSION['utilisateur']['TYPE_UTI'] !== 'Employé') {
-        // Inclure la barre d'état et le header
-        include 'barre_etat.php';
-        include'header.php';
-        include 'init.php';
+    header('Location: index.php');
+    exit();
         
-        // Vérifier si l'utilisateur est connecté en tant qu'employé
-        if (!estConnecte() || $_SESSION['utilisateur']['TYPE_UTI'] !== 'Employé') {
-            // Rediriger vers la page d'accueil si l'utilisateur n'est pas connecté en tant qu'employé
-            header('Location: index.php');
+    // Traiter les réponses au formulaire
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Récupérer le code de l'enquête à partir de la requête ou d'une variable de session
+        $codeSondage = isset($_SESSION['code_sondage']) ? $_SESSION['code_sondage'] : null;
+        
+        if (!$codeSondage) {
+            header('Location: principal.php');
             exit();
         }
         
-        // Traiter les réponses au formulaire
+        // Démarrer la session si la session n'est pas encore démarré
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        // Parcourez les questions du formulaire
+        // Traitement du formulaire de réponses
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Récupérer le code de l'enquête à partir de la requête ou d'une variable de session
+            
+            // Vous devez récupérer le code du sondage à partir de la requête ou d'une variable de session
             $codeSondage = isset($_SESSION['code_sondage']) ? $_SESSION['code_sondage'] : null;
             
             if (!$codeSondage) {
+                // Rediriger vers la page principale
                 header('Location: principal.php');
                 exit();
             }
             
-            // Démarrer la session si la session n'est pas encore démarré
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
+            $bdd = session_start();
             
-            // Parcourez les questions du formulaire
-            // Traitement du formulaire de réponses
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Boucle à travers les questions du formulaire
+            foreach ($questions as $question) {
+                $idQuestion = $question['ID_QUESTION'];
+                $reponseFieldName = 'reponse_' . $idQuestion;
                 
-                // Vous devez récupérer le code du sondage à partir de la requête ou d'une variable de session
-                $codeSondage = isset($_SESSION['code_sondage']) ? $_SESSION['code_sondage'] : null;
+                // Obtenir la réponse du formulaire
+                $reponse = isset($_POST[$reponseFieldName]) ? $_POST[$reponseFieldName] : null;
                 
-                if (!$codeSondage) {
-                    // Rediriger vers la page principale
-                    header('Location: principal.php');
-                    exit();
-                }
+                // Insérer ou mettre à jour la réponse dans la base de données
+                // Récupérer la réponse du formulaire
+                $reponse = isset($_POST[$reponseFieldName]) ? $_POST[$reponseFieldName] : null;
                 
-                $bdd = session_start();
-                
-                // Boucle à travers les questions du formulaire
-                foreach ($questions as $question) {
-                    $idQuestion = $question['ID_QUESTION'];
-                    $reponseFieldName = 'reponse_' . $idQuestion;
-                    
-                    // Obtenir la réponse du formulaire
-                    $reponse = isset($_POST[$reponseFieldName]) ? $_POST[$reponseFieldName] : null;
-                    
-                    // Insérer ou mettre à jour la réponse dans la base de données
-                    // Récupérer la réponse du formulaire
-                    $reponse = isset($_POST[$reponseFieldName]) ? $_POST[$reponseFieldName] : null;
-                    
-                    // Insérez ou mettez à jour la réponse dans la base de données
-                    $sql = "INSERT INTO TP3_REPONSE_UTILISATEUR (NO_UTILISATEUR, ID_CHOIX_REPONSE, TEXTE_REP)
+                // Insérez ou mettez à jour la réponse dans la base de données
+                $sql = "INSERT INTO TP3_REPONSE_UTILISATEUR (NO_UTILISATEUR, ID_CHOIX_REPONSE, TEXTE_REP)
                 VALUES (:noUtilisateur, :idChoixReponse, :texteRep)
                 ON DUPLICATE KEY UPDATE TEXTE_REP = :texteRep";
                     
-                    $requete = performDatabaseQuery($sql, [
-                        ':noUtilisateur' => $_SESSION['NO_UTILISATEUR'],
-                        ':idChoixReponse' => $reponse,
-                        ':texteRep' => isset($_POST['reponse_texte_' . $idQuestion]) ? $_POST['reponse_texte_' . $idQuestion] : null, // Si c'est une question ouverte
-                    ]);
-                }
-                
-                // Rediriger a la page principal
-                $requete = $bdd->prepare($sql);
-                $requete->bindParam(':noUtilisateur', $_SESSION['utilisateur']['NO_UTILISATEUR']);
-                $requete->bindParam(':idChoixReponse', $reponse);
-                $requete->bindParam(':texteRep', $_POST['reponse_texte_' . $idQuestion]);  // Si c'est une question à développement
-                
-                // Exécutez la requête
-                $requete->execute();
+                $requete = performDatabaseQuery($sql, [
+                    ':noUtilisateur' => $_SESSION['NO_UTILISATEUR'],
+                    ':idChoixReponse' => $reponse,
+                    ':texteRep' => isset($_POST['reponse_texte_' . $idQuestion]) ? $_POST['reponse_texte_' . $idQuestion] : null, // Si c'est une question ouverte
+                ]);
             }
             
-            $questions = $requete->fetchAll(PDO::FETCH_ASSOC);
+            // Rediriger a la page principal
+            $requete = $bdd->prepare($sql);
+            $requete->bindParam(':noUtilisateur', $_SESSION['utilisateur']['NO_UTILISATEUR']);
+            $requete->bindParam(':idChoixReponse', $reponse);
+            $requete->bindParam(':texteRep', $_POST['reponse_texte_' . $idQuestion]);  // Si c'est une question à développement
             
-            // Fermez la connexion à la base de données
-            $bdd = null;
-            return $questions;
-            
-            // Rediriger vers la page principale
-            header('Location: principal.php');
-            exit();
+            // Exécutez la requête
+            $requete->execute();
         }
-        ?>
+            
+        $questions = $requete->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Fermez la connexion à la base de données
+        $bdd = null;
+        return $questions;
+        
+        // Rediriger vers la page principale
+        header('Location: principal.php');
+        exit();
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -102,8 +95,10 @@ if (!estConnecte() || $_SESSION['TYPE_UTI'] !== 'Employé') {
 </head>
 <body>
 
-<!-- Affichage de l'entête -->
-<?php include header.php ?>
+<?php 
+    include 'header.php';
+    include 'barre_etat.php';
+?>
 
 <!-- Affichage de la barre d'état -->
 <div id="etat-connexion">

@@ -2,9 +2,9 @@
 session_start();
 
 include 'init.php';
-//include 'barre_etat.php';
+include 'barre_etat.php';
 
-//estConnecte();
+estConnecte();
 
 date_default_timezone_set("America/Toronto");
 
